@@ -8,7 +8,7 @@ import java.time.Duration;
 
 public class BasePage {
     protected WebDriver driver;
-    private final WebDriverWait wait;
+    protected WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -21,5 +21,9 @@ public class BasePage {
 
     protected void enterText(WebElement element, String text) {
         wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
+    }
+
+    protected String getElementText(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element)).getText();
     }
 }

@@ -26,8 +26,9 @@ public class BrowserFactory {
         return driver;
     }
 
-    public static void quitBrowser() {
+    public static void quitBrowser() throws InterruptedException {
         if (driver != null) {
+            Thread.sleep(1000);
             driver.quit();
         }
     }

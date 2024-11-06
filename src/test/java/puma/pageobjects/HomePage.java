@@ -34,12 +34,20 @@ public class HomePage extends BasePage {
     public boolean isSearchResultsCorrect(String searchTerm) {
         try {
             String resultsText = wait.until(ExpectedConditions.visibilityOf(productResultsText)).getText();
+            System.out.println(resultsText.toLowerCase());
+            System.out.println(searchTerm.toLowerCase());
+            System.out.println(resultsText.toLowerCase().contains(searchTerm.toLowerCase()));
             return resultsText.toLowerCase().contains(searchTerm.toLowerCase());
         } catch (Exception e) {
             System.out.println("Error locating search results element: " + e.getMessage());
             return false;
         }
     }
+
+    public boolean isSearchResultsVisible() {
+        return isElementVisible(productResultsText); // `searchResultsText` should be defined in your page object for the message element
+    }
+
 
     public void navigateToCategory(String categoryName) {
         // Placeholder: Add logic to navigate to a specific category

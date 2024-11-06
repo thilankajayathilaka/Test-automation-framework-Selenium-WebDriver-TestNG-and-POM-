@@ -25,11 +25,14 @@ public class HomePageTests {
     public void testSearchFunctionality() {
         homePage.searchProduct("shoes"); // Example search term
         // Verification could be URL contains the search term or a specific element appears
+        System.out.println(homePage.isSearchResultsCorrect("shoes"));
         Assert.assertTrue(homePage.isSearchResultsCorrect("shoes"), "Search results page did not display the correct term.");
     }
 
     @AfterClass
     public void tearDown() {
-        BrowserFactory.quitBrowser();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

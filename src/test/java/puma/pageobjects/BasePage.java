@@ -1,5 +1,6 @@
 package puma.pageobjects;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,4 +27,12 @@ public class BasePage {
     protected String getElementText(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element)).getText();
     }
+    public boolean isElementVisible(WebElement element) {
+        try {
+            return element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
 }

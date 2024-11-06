@@ -25,7 +25,7 @@ public class HomePageTests {
     public void testSearchFunctionality() {
         homePage.searchProduct("shoes"); // Example search term
         // Verification could be URL contains the search term or a specific element appears
-        Assert.assertTrue(driver.getCurrentUrl().contains("search?q=shoes"), "Search results page did not load correctly.");
+        Assert.assertTrue(homePage.isSearchResultsCorrect("shoes"), "Search results page did not display the correct term.");
     }
 
     @AfterClass

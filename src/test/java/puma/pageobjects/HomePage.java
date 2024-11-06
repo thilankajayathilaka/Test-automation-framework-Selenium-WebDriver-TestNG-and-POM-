@@ -17,6 +17,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//input[@data-test-id='search-flyout-form-input']")
     private WebElement popupSearchBar;
 
+    @FindBy(xpath = "//span[@data-test-id='product-results']")
+    private WebElement productResultsText;
+
     public HomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -27,6 +30,15 @@ public class HomePage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(popupSearchBar)); // Wait for the popup input to appear
         enterText(popupSearchBar, productName); // Enter the search text
         popupSearchBar.submit(); // Submit
+    }
+    public boolean isSearchResultsCorrect(String searchTerm) {
+        try {
+            String resultsText = wait.until(ExpectedConditions.visibilityOf(productResultsText)).getText();
+            return resultsText.toLowerCase().contains(searchTerm.toLowerCase());
+        } catch (Exception e) {
+            System.out.println("Error locating search results element: " + e.getMessage());
+            return false;
+        }
     }
 
     public void navigateToCategory(String categoryName) {

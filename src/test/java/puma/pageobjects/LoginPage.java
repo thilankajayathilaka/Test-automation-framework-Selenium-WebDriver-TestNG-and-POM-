@@ -4,38 +4,72 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage extends BasePage {
+public class LoginPage {
+    private WebDriver driver;
+    private WebDriverWait wait;
 
-    @FindBy(name = "email")
+    // Elements
+    @FindBy(xpath = "//input[@name='email']")
     private WebElement emailInput;
 
-    @FindBy(name = "password")
+    @FindBy(xpath = "//input[@name='password']")
     private WebElement passwordInput;
 
     @FindBy(xpath = "//button[@data-test-id='auth-button-login']")
     private WebElement loginButton;
 
+    @FindBy(xpath = "//div[@data-test-id='login-form-error']") // Error message element for failed login
+    private WebElement loginErrorMessage;
+
+    @FindBy(xpath = "//h1[@data-test-id='account-greeting']") // Greeting message element for successful login
+    private WebElement accountGreeting;
+
     public LoginPage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
+    // Enter email
     public void enterEmail(String email) {
-        enterText(emailInput, email);
+        emailInput.clear();
+        emailInput.sendKeys(email);
     }
 
+    // Enter password
     public void enterPassword(String password) {
-        enterText(passwordInput, password);
+        passwordInput.clear();
+        passwordInput.sendKeys(password);
     }
 
+    // Click login button
     public void clickLoginButton() {
-        clickElement(loginButton);
+        loginButton.click();
     }
 
-    public boolean isLoginButtonVisible() {
-        return isElementVisible(loginButton, Duration.ofSeconds(30));
+    // Check if login failed by waiting for the error message
+    public boolean isLoginFailed() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(loginErrorMessage));
+            return loginErrorMessage.isDisplayed();
+        } catch (Exception e) {
+            return false; // Error message not found, login likely succeeded
+        }
+    }
+
+    // Check if login succeeded by waiting for the account greeting
+    public boolean isLoggedIn() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(accountGreeting));
+            return accountGreeting.isDisplayed();
+        } catch (Exception e) {
+            return false; // Greeting message not found, login likely failed
+        }
     }
 }
+

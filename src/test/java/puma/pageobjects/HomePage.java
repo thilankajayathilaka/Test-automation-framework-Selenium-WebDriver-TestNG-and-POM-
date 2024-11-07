@@ -1,10 +1,12 @@
 package puma.pageobjects;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -62,8 +64,17 @@ public class HomePage extends BasePage {
     }
 
     public void acceptCookies() {
-        if (isElementVisible(acceptCookiesButton, Duration.ofSeconds(30))) { // 5-second wait for visibility
-            acceptCookiesButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        int retries = 3;
+
+        for (int i = 0; i < retries; i++) {
+            try {
+                WebElement cookieButton = wait.until(ExpectedConditions.elementToBeClickable(acceptCookiesButton));
+                cookieButton.click();
+                break; // Exit loop if click is successful
+            } catch (StaleElementReferenceException e) {
+                System.out.println("StaleElementReferenceException encountered. Retrying...");
+            }
         }
     }
 

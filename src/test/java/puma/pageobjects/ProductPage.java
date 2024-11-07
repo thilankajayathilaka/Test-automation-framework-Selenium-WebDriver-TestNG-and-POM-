@@ -9,16 +9,16 @@ import java.time.Duration;
 
 public class ProductPage extends BasePage {
 
-    @FindBy(xpath = "//button[contains(@data-test-id, 'add-to-cart-button')]") // Locator for the 'Add to Cart' button
+    @FindBy(xpath = "//button[contains(@data-test-id, 'add-to-cart-button')]")
     private WebElement addToCartButton;
 
-    @FindBy(xpath = "//span[contains(text(), 'Added to Cart')]") // Locator to confirm product added to cart
+    @FindBy(xpath = "//span[contains(text(), 'Added to Cart')]")
     private WebElement confirmationMessage;
 
-    @FindBy(xpath = "//h1[contains(@data-test-id, 'pdp-title')]") // Locator for the 'Add to Cart' button
+    @FindBy(xpath = "//h1[contains(@data-test-id, 'pdp-title')]")
     private WebElement productTitle;
 
-    @FindBy(xpath = "//div[@data-test-id = 'pdp-add-to-cart-error']") // Locator for the 'Add to Cart' button
+    @FindBy(xpath = "//div[@data-test-id = 'pdp-add-to-cart-error']")
     private WebElement addToCartErrorMessage;
 
     public ProductPage(WebDriver driver) {

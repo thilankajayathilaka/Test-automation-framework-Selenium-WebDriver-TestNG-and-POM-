@@ -23,10 +23,10 @@ public class LoginPage {
     @FindBy(xpath = "//button[@data-test-id='auth-button-login']")
     private WebElement loginButton;
 
-    @FindBy(xpath = "//div[@data-test-id='login-form-error']") // Error message element for failed login
+    @FindBy(xpath = "//div[@data-test-id='login-form-error']")
     private WebElement loginErrorMessage;
 
-    @FindBy(xpath = "//h1[@data-test-id='account-greeting']") // Greeting message element for successful login
+    @FindBy(xpath = "//h1[@data-test-id='account-greeting']")
     private WebElement accountGreeting;
 
     public LoginPage(WebDriver driver) {
@@ -62,13 +62,12 @@ public class LoginPage {
         }
     }
 
-    // Check if login succeeded by waiting for the account greeting
     public boolean isLoggedIn() {
         try {
             wait.until(ExpectedConditions.visibilityOf(accountGreeting));
             return accountGreeting.isDisplayed();
         } catch (Exception e) {
-            return false; // Greeting message not found, login likely failed
+            return false;
         }
     }
 }

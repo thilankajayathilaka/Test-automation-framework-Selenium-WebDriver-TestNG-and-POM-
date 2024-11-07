@@ -1,8 +1,6 @@
 package puma.pageobjects;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -27,12 +25,19 @@ public class BasePage {
     protected String getElementText(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element)).getText();
     }
-    public boolean isElementVisible(WebElement element) {
+    public boolean isElementVisible(WebElement element, Duration timeoutInSeconds) {
         try {
+            WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+            wait.until(ExpectedConditions.visibilityOf(element));
             return element.isDisplayed();
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | TimeoutException e) {
             return false;
         }
+    }
+    // Scrolls to the specified element
+    public void scrollToElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
 }

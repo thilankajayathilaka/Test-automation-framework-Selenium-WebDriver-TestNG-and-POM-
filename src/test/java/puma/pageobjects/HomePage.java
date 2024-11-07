@@ -12,10 +12,7 @@ import java.time.Duration;
 
 public class HomePage extends BasePage {
 
-    @FindBy(xpath = "//input[@name='search']") // Example locator, replace with actual Puma search bar ID
-    private WebElement searchBar;
-
-    @FindBy(xpath = "//button[@data-test-id='search-button-nav']") // Example, replace with actual locator
+    @FindBy(xpath = "//button[@data-test-id='search-button-nav']")
     private WebElement searchButton;
 
     @FindBy(xpath = "//input[@data-test-id='search-flyout-form-input']")
@@ -27,10 +24,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//ul[@data-test-id='product-list-items']/li[1]" )
     private WebElement firstItem;
 
-    @FindBy(xpath = "//h1[contains(@data-test-id, 'pdp-title')]") // Locator for the 'Add to Cart' button
-    private WebElement productTitle;
-
-    @FindBy(xpath = "//*[@id=\"puma-skip-here\"]/div[2]/div/div/div/button[2]") // Replace with actual locator
+    @FindBy(xpath = "//*[@id=\"puma-skip-here\"]/div[2]/div/div/div/button[2]")
     private WebElement acceptCookiesButton;
 
     public HomePage(WebDriver driver) {
@@ -39,10 +33,10 @@ public class HomePage extends BasePage {
     }
 
     public void searchProduct(String productName) {
-        clickElement(searchButton); // Click to open the search popup
-        wait.until(ExpectedConditions.visibilityOf(popupSearchBar)); // Wait for the popup input to appear
-        enterText(popupSearchBar, productName); // Enter the search text
-        popupSearchBar.submit(); // Submit
+        clickElement(searchButton);
+        wait.until(ExpectedConditions.visibilityOf(popupSearchBar));
+        enterText(popupSearchBar, productName);
+        popupSearchBar.submit();
     }
     public boolean isSearchResultsCorrect(String searchTerm) {
         try {
@@ -52,10 +46,6 @@ public class HomePage extends BasePage {
             System.out.println("Error locating search results element: " + e.getMessage());
             return false;
         }
-    }
-
-    public boolean isSearchResultsVisible() {
-        return isElementVisible(productResultsText, Duration.ofSeconds(10)); // `searchResultsText` should be defined in your page object for the message element
     }
 
     public void clickFirstItem() {
@@ -76,11 +66,5 @@ public class HomePage extends BasePage {
                 System.out.println("StaleElementReferenceException encountered. Retrying...");
             }
         }
-    }
-
-
-
-    public void navigateToCategory(String categoryName) {
-        // Placeholder: Add logic to navigate to a specific category
     }
 }

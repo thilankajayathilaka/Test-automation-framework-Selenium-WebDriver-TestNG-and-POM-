@@ -21,10 +21,7 @@ public class BasePage {
     protected void enterText(WebElement element, String text) {
         wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
     }
-
-    protected String getElementText(WebElement element) {
-        return wait.until(ExpectedConditions.visibilityOf(element)).getText();
-    }
+    
     public boolean isElementVisible(WebElement element, Duration timeoutInSeconds) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);

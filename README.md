@@ -30,7 +30,7 @@ The Puma Selenium Test Suite is built using Selenium WebDriver with TestNG for t
 - **WebDriverManager** - For managing WebDriver binaries.
 
 ## Setup Instructions
-
-   git clone https://github.com/thilankajayathilaka/Test-automation-framework-Selenium-WebDriver-TestNG-and-POM-.git
-   cd puma-selenium-test-suite
-   mvn clean install
+```bash
+   - git clone https://github.com/thilankajayathilaka/Test-automation-framework-Selenium-WebDriver-TestNG-and-POM-.git
+   - cd puma-selenium-test-suite
+   - mvn clean install

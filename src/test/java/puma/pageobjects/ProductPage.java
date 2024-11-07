@@ -33,26 +33,16 @@ public class ProductPage extends BasePage {
 
             // Wait until the button is clickable
             wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
-
-            // Click the button using JavaScript if the regular click fails
-            try {
-                addToCartButton.click();
-            } catch (ElementClickInterceptedException e) {
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                js.executeScript("arguments[0].click();", addToCartButton);
-            }
+            addToCartButton.click();
         } catch (Exception e) {
             System.out.println("Failed to add to cart: " + e.getMessage());
         }
     }
 
-
-    public boolean isProductAddedToCart() {
-        return isElementVisible(confirmationMessage,Duration.ofSeconds(5));
-    }
-
     public boolean isProductAddedToCartError() {
         return isElementVisible(addToCartErrorMessage,Duration.ofSeconds(5));
     }
+    public boolean isProductPageLoaded() {
+        return isElementVisible(productTitle,Duration.ofSeconds(5));
+    }
 }
-

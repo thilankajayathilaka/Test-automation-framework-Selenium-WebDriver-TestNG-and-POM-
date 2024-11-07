@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Puma Test Suite" parallel="tests" thread-count="3">
+<suite name="Puma Test Suite">
 
-    <!-- Test for Chrome -->
-    <test name="Chrome Tests" verbose="2">
+    <!-- Run LoginTests only in Chrome and ensure it runs first -->
+    <test name="Login Test in Chrome">
         <parameter name="browserType" value="chrome" />
         <classes>
-            <class name="puma.tests.HomePageTests" />
+            <class name="puma.tests.LoginTests" />
         </classes>
     </test>
 
-    <!-- Test for Firefox -->
-    <test name="Firefox Tests" verbose="2">
+    <!-- Run HomePageTests in parallel on Chrome, Firefox, and Edge after LoginTests -->
+    <test name="HomePage Tests in Multiple Browsers" parallel="tests" thread-count="3">
+        <parameter name="browserType" value="chrome" />
         <parameter name="browserType" value="firefox" />
-        <classes>
-            <class name="puma.tests.HomePageTests" />
-        </classes>
-    </test>
-
-    <!-- Test for Edge -->
-    <test name="Edge Tests" verbose="2">
         <parameter name="browserType" value="edge" />
         <classes>
             <class name="puma.tests.HomePageTests" />

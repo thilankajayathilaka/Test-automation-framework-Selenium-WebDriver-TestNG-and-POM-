@@ -21,6 +21,33 @@ The Puma Selenium Test Suite is built using Selenium WebDriver with TestNG for t
 - Product selection and validation of error messages
 - Parallel browser testing for faster execution
 
+## Project Structure
+
+```plaintext
+puma-selenium-test-suite
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── puma
+│   │           ├── pageobjects       # Page Object Model classes
+│   │           │   ├── HomePage.java
+│   │           │   ├── LoginPage.java
+│   │           │   └── ProductPage.java
+│   │           └── utilities         # Utility classes
+│   │               ├── BrowserFactory.java
+│   │               └── ExcelDataProvider.java
+│   └── test
+│       └── java
+│           └── puma
+│               └── tests             # Test classes
+│                   ├── LoginTests.java
+│                   └── HomePageTests.java
+└── src
+    └── test
+        └── resources
+            └── loginData.xlsx        # Test data file
+```
+
 ## Technologies Used
 
 - **Java** - Programming language for writing the tests.
